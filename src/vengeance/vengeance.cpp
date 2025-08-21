@@ -152,8 +152,6 @@ namespace vitex
 	}
 	void heavy_runtime::cleanup_scripting() noexcept
 	{
-		scripting::bindings::heavy_registry().cleanup();
-		VI_TRACE("[lib] free heavy bindings registry");
 	}
 	bool heavy_runtime::has_ft_shaders() const noexcept
 	{

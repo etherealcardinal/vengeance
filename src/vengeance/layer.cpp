@@ -1315,7 +1315,7 @@ namespace vitex
 		}
 		material::material(const material& other) noexcept : material(other.scene)
 		{
-			memcpy(&surface, &other.surface, sizeof(subsurface));
+			memcpy((void*)&surface, &other.surface, sizeof(subsurface));
 			if (other.diffuse_map != nullptr)
 			{
 				diffuse_map = other.diffuse_map;

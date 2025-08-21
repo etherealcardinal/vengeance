@@ -2879,7 +2879,7 @@ namespace vitex
 				memcpy(target->projection, projection, sizeof(trigonometry::matrix4x4) * 6);
 				memcpy(target->view, view, sizeof(trigonometry::matrix4x4) * 6);
 				memcpy(&target->shadow, &shadow, sizeof(shadow));
-				memcpy(&target->sky, &sky, sizeof(sky));
+				memcpy((void*)&target->sky, &sky, sizeof(sky));
 
 				return target;
 			}

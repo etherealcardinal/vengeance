@@ -10,9 +10,9 @@
 [submodule "deps/bullet3"]
 	path = deps/bullet3
 	url = https://github.com/bulletphysics/bullet3
-[submodule "deps/vitex"]
-	path = deps/vitex
-	url = https://github.com/romanpunia/vitex
 [submodule "deps/rmlui"]
 	path = deps/rmlui
 	url = https://github.com/mikke89/RmlUi
+[submodule "deps/vitex"]
+	path = deps/vitex
+	url = https://github.com/romanpunia/vitex
