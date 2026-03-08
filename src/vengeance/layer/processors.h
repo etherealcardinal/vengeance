@@ -69,7 +69,7 @@ namespace vitex
 
 			struct mesh_blob
 			{
-				core::unordered_map<size_t, size_t> joint_indices;
+				core::hash_map<size_t, size_t> joint_indices;
 				core::vector<trigonometry::skin_vertex> vertices;
 				core::vector<int32_t> indices;
 				core::string name;
@@ -79,7 +79,7 @@ namespace vitex
 
 			struct model_info
 			{
-				core::unordered_map<core::string, mesh_joint> joint_offsets;
+				core::hash_map<core::string, mesh_joint> joint_offsets;
 				core::vector<mesh_blob> meshes;
 				trigonometry::matrix4x4 transform;
 				trigonometry::joint skeleton;
@@ -90,9 +90,9 @@ namespace vitex
 
 			struct model_channel
 			{
-				core::unordered_map<float, trigonometry::vector3> positions;
-				core::unordered_map<float, trigonometry::vector3> scales;
-				core::unordered_map<float, trigonometry::quaternion> rotations;
+				core::hash_map<float, trigonometry::vector3> positions;
+				core::hash_map<float, trigonometry::vector3> scales;
+				core::hash_map<float, trigonometry::quaternion> rotations;
 			};
 
 			class material_processor final : public processor

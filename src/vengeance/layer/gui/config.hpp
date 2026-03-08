@@ -25,7 +25,7 @@ namespace Rml
 	{
 		inline size_t operator()(const T& Value) const
 		{
-			auto Result = vitex::core::key_hasher<T>()(Value);
+			auto Result = vitex::core::key_hash<T>()(Value);
 			return robin_hood::hash_int(static_cast<robin_hood::detail::SizeT>(Result));
 		}
 	};
@@ -43,9 +43,9 @@ namespace Rml
 	template <typename T1, typename T2>
 	using Pair = std::pair<T1, T2>;
 	template <typename Key, typename Value>
-	using StableMap = vitex::core::ordered_map<Key, Value>;
+	using StableMap = vitex::core::btree_map<Key, Value>;
 	template <typename Key, typename Value>
-	using UnorderedMultimap = vitex::core::unordered_multi_map<Key, Value>;
+	using UnorderedMultimap = vitex::core::multi_hash_map<Key, Value>;
 	template <typename Key, typename Value>
 	using UnorderedMap = robin_hood::unordered_flat_map<Key, Value, MixedHasher<Key>, vitex::core::equal_to<Key>>;
 	template <typename Key, typename Value>
@@ -62,7 +62,7 @@ namespace Rml
 		return std::make_move_iterator(It);
 	}
 	template <typename T>
-	using Hash = typename vitex::core::key_hasher<T>;
+	using Hash = typename vitex::core::key_hash<T>;
 	template <typename T>
 	using Function = std::function<T>;
 	using String = vitex::core::string;

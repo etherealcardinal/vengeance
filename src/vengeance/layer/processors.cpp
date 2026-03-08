@@ -354,7 +354,7 @@ namespace vitex
 					target.rotations[(float)key.mTime] = trigonometry::quaternion(key.mValue.x, key.mValue.y, key.mValue.z, key.mValue.w);
 				}
 			}
-			void fill_scene_timeline(const core::unordered_set<float>& timings, core::vector<float>& timeline)
+			void fill_scene_timeline(const core::hash_set<float>& timings, core::vector<float>& timeline)
 			{
 				timeline.reserve(timings.size());
 				for (auto& time : timings)
@@ -367,7 +367,7 @@ namespace vitex
 			}
 			void fill_scene_keys(model_channel& info, core::vector<trigonometry::animator_key>& keys)
 			{
-				core::unordered_set<float> timings;
+				core::hash_set<float> timings;
 				timings.reserve(keys.size());
 
 				float first_position = std::numeric_limits<float>::max();
@@ -432,9 +432,9 @@ namespace vitex
 					}
 				}
 			}
-			void fill_scene_clip(trigonometry::skin_animator_clip& clip, core::unordered_map<core::string, mesh_bone>& indices, core::unordered_map<core::string, core::vector<trigonometry::animator_key>>& channels)
+			void fill_scene_clip(trigonometry::skin_animator_clip& clip, core::hash_map<core::string, mesh_bone>& indices, core::hash_map<core::string, core::vector<trigonometry::animator_key>>& channels)
 			{
-				core::unordered_set<float> timings;
+				core::hash_set<float> timings;
 				for (auto& channel : channels)
 				{
 					timings.reserve(channel.second.size());
@@ -473,7 +473,7 @@ namespace vitex
 					}
 				}
 			}
-			void fill_scene_joint_indices(const aiScene* scene, aiNode* node, core::unordered_map<core::string, mesh_bone>& indices, size_t& index)
+			void fill_scene_joint_indices(const aiScene* scene, aiNode* node, core::hash_map<core::string, mesh_bone>& indices, size_t& index)
 			{
 				for (uint32_t n = 0; n < node->mNumMeshes; n++)
 				{
@@ -493,7 +493,7 @@ namespace vitex
 					fill_scene_joint_indices(scene, next, indices, index);
 				}
 			}
-			bool fill_scene_joint_defaults(aiNode* node, core::unordered_map<core::string, mesh_bone>& indices, size_t& index, bool in_skeleton)
+			bool fill_scene_joint_defaults(aiNode* node, core::hash_map<core::string, mesh_bone>& indices, size_t& index, bool in_skeleton)
 			{
 				core::string name = node->mName.C_Str();
 				auto it = indices.find(name);
@@ -533,7 +533,7 @@ namespace vitex
 			}
 			void fill_scene_animations(core::vector<trigonometry::skin_animator_clip>* info, const aiScene* scene)
 			{
-				core::unordered_map<core::string, mesh_bone> indices; size_t index = 0;
+				core::hash_map<core::string, mesh_bone> indices; size_t index = 0;
 				fill_scene_joint_indices(scene, scene->mRootNode, indices, index);
 				fill_scene_joint_defaults(scene->mRootNode, indices, index, false);
 
@@ -548,7 +548,7 @@ namespace vitex
 					clip.duration = (float)animation->mDuration;
 					clip.rate = compute::mathf::max(0.01f, (float)animation->mTicksPerSecond);
 
-					core::unordered_map<core::string, core::vector<trigonometry::animator_key>> channels;
+					core::hash_map<core::string, core::vector<trigonometry::animator_key>> channels;
 					for (uint32_t j = 0; j < animation->mNumChannels; j++)
 					{
 						auto& channel = animation->mChannels[j];

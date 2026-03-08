@@ -841,7 +841,7 @@ namespace vitex
 			friend activity;
 
 		private:
-			core::unordered_map<uint32_t, activity*> consumers;
+			core::hash_map<uint32_t, activity*> consumers;
 
 		public:
 			void push(activity* value);
@@ -1183,7 +1183,7 @@ namespace vitex
 
 		public:
 			trigonometry::matrix4x4 transform;
-			core::unordered_map<size_t, size_t> joints;
+			core::hash_map<size_t, size_t> joints;
 			core::string name;
 
 		protected:
@@ -1649,12 +1649,12 @@ namespace vitex
 			};
 
 		protected:
-			core::unordered_map<core::string, depth_stencil_state*> depth_stencil_states;
-			core::unordered_map<core::string, rasterizer_state*> rasterizer_states;
-			core::unordered_map<core::string, blend_state*> blend_states;
-			core::unordered_map<core::string, sampler_state*> sampler_states;
-			core::unordered_map<core::string, input_layout*> input_layouts;
-			core::unordered_map<core::string, section*> sections;
+			core::hash_map<core::string, depth_stencil_state*> depth_stencil_states;
+			core::hash_map<core::string, rasterizer_state*> rasterizer_states;
+			core::hash_map<core::string, blend_state*> blend_states;
+			core::hash_map<core::string, sampler_state*> sampler_states;
+			core::hash_map<core::string, input_layout*> input_layouts;
+			core::hash_map<core::string, section*> sections;
 			core::single_queue<render_thread_callback> queue;
 			std::thread::id render_thread;
 			primitive_topology primitives;
@@ -1839,11 +1839,11 @@ namespace vitex
 			bool remove_section(const std::string_view& name);
 			bool is_left_handed() const;
 			core::string get_shader_main(shader_type type) const;
-			const core::unordered_map<core::string, depth_stencil_state*>& get_depth_stencil_states() const;
-			const core::unordered_map<core::string, rasterizer_state*>& get_rasterizer_states() const;
-			const core::unordered_map<core::string, blend_state*>& get_blend_states() const;
-			const core::unordered_map<core::string, sampler_state*>& get_sampler_states() const;
-			const core::unordered_map<core::string, input_layout*>& get_input_layouts() const;
+			const core::hash_map<core::string, depth_stencil_state*>& get_depth_stencil_states() const;
+			const core::hash_map<core::string, rasterizer_state*>& get_rasterizer_states() const;
+			const core::hash_map<core::string, blend_state*>& get_blend_states() const;
+			const core::hash_map<core::string, sampler_state*>& get_sampler_states() const;
+			const core::hash_map<core::string, input_layout*>& get_input_layouts() const;
 			expects_video<surface*> create_surface(texture_2d* base);
 			depth_stencil_state* get_depth_stencil_state(const std::string_view& name);
 			blend_state* get_blend_state(const std::string_view& name);

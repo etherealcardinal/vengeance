@@ -1,5 +1,6 @@
 #ifndef VI_LAYER_COMPONENTS_H
 #define VI_LAYER_COMPONENTS_H
+#include <vitex/scripting.h>
 #include "../layer.h"
 
 namespace vitex

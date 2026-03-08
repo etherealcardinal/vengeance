@@ -1,11 +1,11 @@
 #include "gui.h"
+#include <vitex/scripting.h>
 #include <vitex/network.h>
 #ifdef VI_RMLUI
 #include <RmlUi/Core.h>
 #include <RmlUi/Core/Stream.h>
 #include <RmlUi/Core/RenderInterfaceCompatibility.h>
 #include <Source/Core/StyleSheetFactory.h>
-#include <Source/Core/ElementStyle.h>
 #endif
 #define RENDERS_FOR_DATA_EVENT 1
 #define RENDERS_FOR_SIZE_EVENT 30
@@ -399,8 +399,8 @@ namespace vitex
 			class main_subsystem final : public Rml::SystemInterface
 			{
 			private:
-				core::unordered_map<core::string, translation_callback> translators;
-				core::unordered_map<core::string, core::vector<font_info>> fonts;
+				core::hash_map<core::string, translation_callback> translators;
+				core::hash_map<core::string, core::vector<font_info>> fonts;
 				graphics::activity* activity;
 				core::timer* time;
 
@@ -590,7 +590,7 @@ namespace vitex
 						fonts[target_path].push_back(info);
 					return true;
 				}
-				core::unordered_map<core::string, core::vector<font_info>>* get_font_faces()
+				core::hash_map<core::string, core::vector<font_info>>* get_font_faces()
 				{
 					return &fonts;
 				}
@@ -3751,7 +3751,7 @@ namespace vitex
 				return 0;
 #endif
 			}
-			core::unordered_map<core::string, core::vector<font_info>>* context::get_font_faces()
+			core::hash_map<core::string, core::vector<font_info>>* context::get_font_faces()
 			{
 #ifdef VI_RMLUI
 				return subsystem::get()->get_system_interface()->get_font_faces();

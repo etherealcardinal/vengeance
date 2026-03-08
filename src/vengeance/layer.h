@@ -195,8 +195,8 @@ namespace vitex
 
 		struct idx_snapshot
 		{
-			core::unordered_map<entity*, size_t> to;
-			core::unordered_map<size_t, entity*> from;
+			core::hash_map<entity*, size_t> to;
+			core::hash_map<size_t, entity*> from;
 		};
 
 		struct visibility_query
@@ -351,8 +351,8 @@ namespace vitex
 
 		struct pose_buffer
 		{
-			core::unordered_map<graphics::skin_mesh_buffer*, pose_matrices> matrices;
-			core::unordered_map<size_t, pose_data> offsets;
+			core::hash_map<graphics::skin_mesh_buffer*, pose_matrices> matrices;
+			core::hash_map<size_t, pose_data> offsets;
 
 			void fill(skin_model* mesh);
 			void fill(trigonometry::joint& next);
@@ -586,7 +586,7 @@ namespace vitex
 
 			struct
 			{
-				core::unordered_map<uint64_t, component*> components;
+				core::hash_map<uint64_t, component*> components;
 				core::string name;
 			} type;
 
@@ -623,11 +623,11 @@ namespace vitex
 			~entity() noexcept;
 
 		public:
-			core::unordered_map<uint64_t, component*>::iterator begin()
+			core::hash_map<uint64_t, component*>::iterator begin()
 			{
 				return type.components.begin();
 			}
-			core::unordered_map<uint64_t, component*>::iterator end()
+			core::hash_map<uint64_t, component*>::iterator end()
 			{
 				return type.components.end();
 			}
@@ -662,7 +662,7 @@ namespace vitex
 			friend scene_graph;
 
 		protected:
-			core::unordered_map<void*, material*> materials;
+			core::hash_map<void*, material*> materials;
 
 		private:
 			geo_category category;
@@ -687,7 +687,7 @@ namespace vitex
 			int64_t get_slot();
 			material* get_material(void* surface);
 			material* get_material();
-			const core::unordered_map<void*, material*>& get_materials();
+			const core::hash_map<void*, material*>& get_materials();
 
 		public:
 			VI_COMPONENT("drawable_component");
@@ -1067,7 +1067,7 @@ namespace vitex
 			};
 
 		private:
-			core::unordered_map<core::string, scache> cache;
+			core::hash_map<core::string, scache> cache;
 			graphics::graphics_device* device;
 			std::mutex exclusive;
 
@@ -1077,7 +1077,7 @@ namespace vitex
 			graphics::expects_graphics<graphics::shader*> compile(const std::string_view& name, const graphics::shader::desc& desc, size_t buffer_size = 0);
 			graphics::shader* get(const std::string_view& name);
 			core::string find(graphics::shader* shader);
-			const core::unordered_map<core::string, scache>& get_caches() const;
+			const core::hash_map<core::string, scache>& get_caches() const;
 			bool has(const std::string_view& name);
 			bool free(const std::string_view& name, graphics::shader* shader = nullptr);
 			void clear_cache();
@@ -1093,7 +1093,7 @@ namespace vitex
 			};
 
 		private:
-			core::unordered_map<core::string, scache> cache;
+			core::hash_map<core::string, scache> cache;
 			graphics::graphics_device* device;
 			graphics::element_buffer* sphere[2];
 			graphics::element_buffer* cube[2];
@@ -1119,7 +1119,7 @@ namespace vitex
 			graphics::element_buffer* get_cube(buffer_type type);
 			graphics::element_buffer* get_box(buffer_type type);
 			graphics::element_buffer* get_skin_box(buffer_type type);
-			const core::unordered_map<core::string, scache>& get_caches() const;
+			const core::hash_map<core::string, scache>& get_caches() const;
 			void get_sphere_buffers(graphics::element_buffer** result);
 			void get_cube_buffers(graphics::element_buffer** result);
 			void get_box_buffers(graphics::element_buffer** result);
@@ -1209,10 +1209,10 @@ namespace vitex
 			} tasking;
 
 		protected:
-			core::unordered_map<core::string, core::unordered_set<message_callback*>> listeners;
-			core::unordered_map<uint64_t, core::unordered_set<component*>> changes;
-			core::unordered_map<uint64_t, sparse_index*> registry;
-			core::unordered_map<component*, size_t> incomplete;
+			core::hash_map<core::string, core::hash_set<message_callback*>> listeners;
+			core::hash_map<uint64_t, core::hash_set<component*>> changes;
+			core::hash_map<uint64_t, sparse_index*> registry;
+			core::hash_map<component*, size_t> incomplete;
 			core::single_queue<core::task_callback> transactions;
 			core::single_queue<event> events;
 			core::pool<component*> actors[(size_t)actor_type::count];
@@ -1310,7 +1310,7 @@ namespace vitex
 			core::vector<depth_cube_map*>& get_points_mapping();
 			core::vector<depth_map*>& get_spots_mapping();
 			core::vector<depth_cascade_map*>& get_lines_mapping();
-			const core::unordered_map<uint64_t, sparse_index*>& get_registry() const;
+			const core::hash_map<uint64_t, sparse_index*>& get_registry() const;
 			core::string as_resource_path(const std::string_view& path);
 			entity* add_entity();
 			entity* clone_entity(entity* value);
@@ -2000,7 +2000,7 @@ namespace vitex
 		private:
 			renderer_proxy<t, geometry, instance> proxy;
 			std::function<void(t*, instance&, batching&)> upsert;
-			core::unordered_map<t*, graphics::query*> active;
+			core::hash_map<t*, graphics::query*> active;
 			core::single_queue<graphics::query*> inactive;
 			graphics::depth_stencil_state* depth_stencil;
 			graphics::blend_state* blend;
@@ -2351,8 +2351,8 @@ namespace vitex
 					uint32_t render_buffer = (uint32_t)-1;
 					uint32_t sampler = (uint32_t)-1;
 				} slots;
-				core::unordered_map<core::string, uint32_t> offsets;
-				core::unordered_set<uint32_t> regs;
+				core::hash_map<core::string, uint32_t> offsets;
+				core::hash_set<uint32_t> regs;
 				graphics::shader* effect = nullptr;
 				core::string filename;
 			};
@@ -2365,7 +2365,7 @@ namespace vitex
 			} slots;
 
 		protected:
-			core::unordered_map<graphics::shader*, shader_data> effects;
+			core::hash_map<graphics::shader*, shader_data> effects;
 			graphics::depth_stencil_state* depth_stencil;
 			graphics::rasterizer_state* rasterizer;
 			graphics::blend_state* blend;

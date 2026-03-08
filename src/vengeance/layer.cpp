@@ -1617,7 +1617,7 @@ namespace vitex
 		}
 		void entity::remove_component(uint64_t id)
 		{
-			core::unordered_map<uint64_t, component*>::iterator it = type.components.find(id);
+			core::hash_map<uint64_t, component*>::iterator it = type.components.find(id);
 			if (it == type.components.end())
 				return;
 
@@ -1671,7 +1671,7 @@ namespace vitex
 		}
 		component* entity::get_component(uint64_t id)
 		{
-			core::unordered_map<uint64_t, component*>::iterator it = type.components.find(id);
+			core::hash_map<uint64_t, component*>::iterator it = type.components.find(id);
 			if (it != type.components.end())
 				return it->second;
 
@@ -1832,7 +1832,7 @@ namespace vitex
 
 			return materials.begin()->second;
 		}
-		const core::unordered_map<void*, material*>& drawable::get_materials()
+		const core::hash_map<void*, material*>& drawable::get_materials()
 		{
 			return materials;
 		}
@@ -2476,7 +2476,7 @@ namespace vitex
 
 			return core::string();
 		}
-		const core::unordered_map<core::string, shader_cache::scache>& shader_cache::get_caches() const
+		const core::hash_map<core::string, shader_cache::scache>& shader_cache::get_caches() const
 		{
 			return cache;
 		}
@@ -3018,7 +3018,7 @@ namespace vitex
 
 			return nullptr;
 		}
-		const core::unordered_map<core::string, primitive_cache::scache>& primitive_cache::get_caches() const
+		const core::hash_map<core::string, primitive_cache::scache>& primitive_cache::get_caches() const
 		{
 			return cache;
 		}
@@ -4778,7 +4778,7 @@ namespace vitex
 		{
 			return display.lines;
 		}
-		const core::unordered_map<uint64_t, sparse_index*>& scene_graph::get_registry() const
+		const core::hash_map<uint64_t, sparse_index*>& scene_graph::get_registry() const
 		{
 			return registry;
 		}

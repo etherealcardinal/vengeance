@@ -1596,23 +1596,23 @@ namespace vitex
 		{
 			return shader_gen;
 		}
-		const core::unordered_map<core::string, depth_stencil_state*>& graphics_device::get_depth_stencil_states() const
+		const core::hash_map<core::string, depth_stencil_state*>& graphics_device::get_depth_stencil_states() const
 		{
 			return depth_stencil_states;
 		}
-		const core::unordered_map<core::string, rasterizer_state*>& graphics_device::get_rasterizer_states() const
+		const core::hash_map<core::string, rasterizer_state*>& graphics_device::get_rasterizer_states() const
 		{
 			return rasterizer_states;
 		}
-		const core::unordered_map<core::string, blend_state*>& graphics_device::get_blend_states() const
+		const core::hash_map<core::string, blend_state*>& graphics_device::get_blend_states() const
 		{
 			return blend_states;
 		}
-		const core::unordered_map<core::string, sampler_state*>& graphics_device::get_sampler_states() const
+		const core::hash_map<core::string, sampler_state*>& graphics_device::get_sampler_states() const
 		{
 			return sampler_states;
 		}
-		const core::unordered_map<core::string, input_layout*>& graphics_device::get_input_layouts() const
+		const core::hash_map<core::string, input_layout*>& graphics_device::get_input_layouts() const
 		{
 			return input_layouts;
 		}

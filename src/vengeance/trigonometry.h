@@ -987,7 +987,7 @@ namespace vitex
 			};
 
 		private:
-			core::unordered_map<void*, size_t> items;
+			core::hash_map<void*, size_t> items;
 			core::vector<node> nodes;
 			size_t root;
 			size_t node_count;
@@ -1002,7 +1002,7 @@ namespace vitex
 			void insert_item(void* item, const vector3& lower_bound, const vector3& upper_bound);
 			bool update_item(void* item, const vector3& lower_bound, const vector3& upper_bound, bool always = false);
 			const bounding& get_area(void* item);
-			const core::unordered_map<void*, size_t>& get_items() const;
+			const core::hash_map<void*, size_t>& get_items() const;
 			const core::vector<node>& get_nodes() const;
 			size_t get_nodes_count() const;
 			size_t get_height() const;

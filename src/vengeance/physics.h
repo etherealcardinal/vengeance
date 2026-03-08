@@ -859,7 +859,7 @@ namespace vitex
 			} timing;
 
 		private:
-			core::unordered_map<void*, size_t> shapes;
+			core::hash_map<void*, size_t> shapes;
 			btCollisionConfiguration* collision;
 			btBroadphaseInterface* broadphase;
 			btConstraintSolver* solver;

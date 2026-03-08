@@ -84,8 +84,8 @@ namespace vitex
 				friend ogl_element_buffer;
 
 			public:
-				core::unordered_map<size_t, core::vector<std::function<void(size_t)>>> vertex_layout;
-				core::unordered_map<core::string, GLuint> layouts;
+				core::hash_map<size_t, core::vector<std::function<void(size_t)>>> vertex_layout;
+				core::hash_map<core::string, GLuint> layouts;
 				GLuint dynamic_resource = GL_NONE;
 
 			public:
@@ -105,7 +105,7 @@ namespace vitex
 				bool compiled;
 
 			public:
-				core::unordered_map<GLuint, ogl_device*> programs;
+				core::hash_map<GLuint, ogl_device*> programs;
 				GLuint vertex_shader = GL_NONE;
 				GLuint pixel_shader = GL_NONE;
 				GLuint geometry_shader = GL_NONE;
@@ -126,7 +126,7 @@ namespace vitex
 				friend ogl_device;
 
 			private:
-				core::unordered_map<GLuint, ogl_input_layout*> bindings;
+				core::hash_map<GLuint, ogl_input_layout*> bindings;
 				GLuint resource = GL_NONE;
 				GLenum flags = GL_NONE;
 
@@ -363,7 +363,7 @@ namespace vitex
 				struct
 				{
 					std::tuple<ogl_element_buffer*, format> index_buffer = { nullptr, format::unknown };
-					core::unordered_map<uint64_t, GLuint> programs;
+					core::hash_map<uint64_t, GLuint> programs;
 					std::array<ogl_element_buffer*, units_size> vertex_buffers = { };
 					std::array<GLuint, units_size> bindings = { };
 					std::array<GLuint, units_size> textures = { };

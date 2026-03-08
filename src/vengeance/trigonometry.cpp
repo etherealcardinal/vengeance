@@ -4821,7 +4821,7 @@ namespace vitex
 			node.item = item;
 			insert_leaf(node_index);
 
-			items.insert(core::unordered_map<void*, size_t>::value_type(item, node_index));
+			items.insert(core::hash_map<void*, size_t>::value_type(item, node_index));
 		}
 		void cosmos::remove_item(void* item)
 		{
@@ -5220,7 +5220,7 @@ namespace vitex
 		{
 			return root;
 		}
-		const core::unordered_map<void*, size_t>& cosmos::get_items() const
+		const core::hash_map<void*, size_t>& cosmos::get_items() const
 		{
 			return items;
 		}

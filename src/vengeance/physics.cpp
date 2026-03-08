@@ -1198,7 +1198,7 @@ namespace vitex
 			VI_ASSERT(instance != nullptr, "softbody should be initialized");
 			VI_ASSERT(result != nullptr, "result should be set");
 
-			core::unordered_map<btSoftBody::Node*, int> nodes;
+			core::hash_map<btSoftBody::Node*, int> nodes;
 			for (int i = 0; i < instance->m_nodes.size(); i++)
 				nodes.insert(std::make_pair(&instance->m_nodes[i], i));
 

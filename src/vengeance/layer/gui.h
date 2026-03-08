@@ -1,5 +1,6 @@
 #ifndef VI_LAYER_GUI_H
 #define VI_LAYER_GUI_H
+#include <vitex/scripting.h>
 #include "../layer.h"
 
 namespace Rml
@@ -511,7 +512,7 @@ namespace vitex
 				friend context;
 
 			private:
-				core::unordered_map<core::string, data_node*> props;
+				core::hash_map<core::string, data_node*> props;
 				core::vector<std::function<void()>> callbacks;
 				Rml::DataModelConstructor* base;
 				model_callback on_unmount;
@@ -644,8 +645,8 @@ namespace vitex
 				} inputs;
 
 			private:
-				core::unordered_map<int, core::unordered_map<core::string, Rml::Element*>> elements;
-				core::unordered_map<core::string, data_model*> models;
+				core::hash_map<int, core::hash_map<core::string, Rml::Element*>> elements;
+				core::hash_map<core::string, data_model*> models;
 				scripting::compiler* compiler;
 				trigonometry::vector2 cursor;
 				model_callback on_mount;
@@ -699,7 +700,7 @@ namespace vitex
 				void set_documents_base_tag(const std::string_view& tag);
 				void set_mount_callback(model_callback&& callback);
 				core::string get_documents_base_tag();
-				core::unordered_map<core::string, core::vector<font_info>>* get_font_faces();
+				core::hash_map<core::string, core::vector<font_info>>* get_font_faces();
 				trigonometry::vector2 get_dimensions() const;
 				data_model* set_data_model(const std::string_view& name);
 				data_model* get_data_model(const std::string_view& name);
